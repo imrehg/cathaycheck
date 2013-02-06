@@ -1,5 +1,5 @@
 
-echo "Credentials into ID/PIN/CODE"
+#echo "Credentials into ID/PIN/CODE"
 
 URL1=https://www.mybank.com.tw/pweb/
 URL2=https://www.mybank.com.tw/pweb/login.asp
