@@ -8,6 +8,18 @@ Eg. in Linux: export ID=xxxxxxxxxx; export PIN=xxxx; export CODE=xxxxxx
 
 Fixing a bunch of small tidbits, and will eventually move to a single file Python solution.
 
+The output has a format as
+
+    2013-03-06T09:59:52+0800, 12345, 9876
+
+which has the current date, total balance, and available balance. The date is fully qualified, though formatted for Taiwan's time zone since I'm here. Units are TWD (New Taiwan Dollar).
+
+## Usage from cron
+
+    55 23 * * * export ID=XXXX; export PIN=XXXX; export CODE=XXXX; cd /home/user/cathaycheck; BALANCE=$(./banking.sh); echo $BALANCE >> cathay_balance.txt; echo $BALANCE | /usr/bin/mail -s "SUBJECT" "EMAIL"
+
+This will check the balance and save it into a file called `cathay_balance.txt`, as well as sending an email to a specified address, all that every day at 23:55 at night.
+
 ## Dependencies
 
  * Python 2.7.x
