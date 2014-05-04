@@ -6,11 +6,14 @@ URL2=https://www.mybank.com.tw/pweb/login.asp
 URL3=https://www.mybank.com.tw/pweb/main_menu.asp
 URL4=https://www.mybank.com.tw/pweb/main_menu_bottom.asp
 URL5=https://www.mybank.com.tw/pweb/C01.asp
+URL6=https://www.mybank.com.tw/pweb/C01_Download.asp
+URL_LOGOUT=https://www.mybank.com.tw/pweb/logout.asp
 
 OUT1=url1.html
 OUT2=url2.html
 OUT3=url3.html
 OUT4=url4.html
+OUT6=url6.html
 
 if [ -f cookies.txt ]; then
   rm cookies.txt
@@ -67,5 +70,25 @@ curl \
      -c cookies.txt \
      --referer ${URL4} \
      ${URL5} > url5.html
+
+# data page other
+curl \
+     -ss \
+     --location \
+     --user-agent "${USERAGENT}" \
+     -b cookies.txt \
+     -c cookies.txt \
+     --referer ${URL5} \
+     ${URL6} > ${OUT6}
+
+# logging out
+curl \
+     -ss \
+     --location \
+     --user-agent "${USERAGENT}" \
+     -b cookies.txt \
+     -c cookies.txt \
+     --referer ${URL6} \
+     ${URL_LOGOUT} > /dev/null
 
 ./parsing.py url5.html

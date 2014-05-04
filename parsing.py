@@ -15,7 +15,7 @@ html_data =open(sys.argv[1], "r")
 html_doc=html_data.read()
 
 soup = BeautifulSoup(html_doc)
-t = soup.table.table
+t = soup.table
 rows = t.findAll('tr', {"class" : "IC1"})
 goodrow = rows[1]
 parts = goodrow.findAll('td')
